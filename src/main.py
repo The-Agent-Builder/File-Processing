@@ -15,7 +15,8 @@ from pathlib import Path
 from typing import Dict
 
 # 固定路径常量
-DATA_INPUTS = Path("data/inputs")
+# v3.0: 文件组按 manifest 中的 key 组织（这里是 "input"）
+DATA_INPUTS = Path("data/inputs/input")
 DATA_OUTPUTS = Path("data/outputs")
 
 # API 配置
