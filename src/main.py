@@ -66,14 +66,35 @@ def parse_file() -> Dict:
 
         # 打开文件并发送请求
         with open(input_file, 'rb') as f:
+            # 准备文件和表单数据
             files = {'file': (input_file.name, f, 'application/octet-stream')}
+            
+            # URL 参数
             params = {
                 'format': 'md',  # 输出格式为 Markdown
-                'cache': True
+                'cache': False
+            }
+            
+            # OCR 配置参数（作为表单数据）
+            data = {
+                'force_cv': 'auto',
+                'resolution': 'high',
+                'de_seal_enable': 'true',
+                'fix_text_enable': 'true',
+                'char_box_enable': 'false',
+                'tilt_correction_enable': 'true',
+                'border_table_alg': 'sdbordertable_cv_model',
+                'borderless_table_alg': 'sdborderlesstable_cv_lite_model',
+                'layout_alg': 'sdlayout',
+                'formula_enable': 'true',
+                'figure_rec_by_vl_enable': 'false',
+                'figure_upload_enable': 'false',
+                'chapter_alg': 're',
+                'reading_order_enable': 'true'
             }
 
             # 发送请求
-            response = requests.post(url, files=files, params=params, timeout=300)
+            response = requests.post(url, files=files, params=params, data=data, timeout=300)
             response.raise_for_status()
 
         # 解析响应

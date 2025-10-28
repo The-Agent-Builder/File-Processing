@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "id": "file-processing-prefab",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "name": "文件处理预制件",
   "description": "封装文件解析 API，支持将 PDF、Markdown、图片等文件解析为 Markdown 格式的纯文本",
   "author": "ketd",
