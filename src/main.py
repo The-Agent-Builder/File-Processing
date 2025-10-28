@@ -68,29 +68,30 @@ def parse_file() -> Dict:
         with open(input_file, 'rb') as f:
             # 准备文件和表单数据
             files = {'file': (input_file.name, f, 'application/octet-stream')}
-            
+
             # URL 参数
             params = {
                 'format': 'md',  # 输出格式为 Markdown
                 'cache': False
             }
-            
-            # OCR 配置参数（作为表单数据）
+
+            # OCR 配置参数（使用 API 文档定义的默认值）
+            # 参考: OCRParams 中精度预设
             data = {
-                'force_cv': 'auto',
-                'resolution': 'high',
-                'de_seal_enable': 'true',
-                'fix_text_enable': 'true',
-                'char_box_enable': 'false',
-                'tilt_correction_enable': 'true',
-                'border_table_alg': 'sdbordertable_cv_model',
-                'borderless_table_alg': 'sdborderlesstable_cv_lite_model',
-                'layout_alg': 'sdlayout',
-                'formula_enable': 'true',
-                'figure_rec_by_vl_enable': 'false',
-                'figure_upload_enable': 'false',
-                'chapter_alg': 're',
-                'reading_order_enable': 'true'
+                'force_cv': 'yes',  # 强制按扫描件处理（默认值）
+                'resolution': 'high',  # 高分辨率 dpi=150
+                'de_seal_enable': 'true',  # 消除页面内的印章
+                'fix_text_enable': 'true',  # 用非扫描件工具修复 OCR 结果
+                'char_box_enable': 'false',  # 不提供每个字的 box
+                'tilt_correction_enable': 'true',  # 页面旋转时进行矫正
+                'border_table_alg': 'sdbordertable_cv_model',  # 有框表格算法
+                'borderless_table_alg': 'sdborderlesstable_cv_lite_model',  # 无框表格算法
+                'layout_alg': 'sdlayout',  # layout 算法
+                'formula_enable': 'true',  # 识别公式
+                'figure_rec_by_vl_enable': 'false',  # 不使用大模型描述图片
+                'figure_upload_enable': 'false',  # 不上传图片到 OSS
+                'chapter_alg': 're',  # 章节识别算法
+                'reading_order_enable': 'true'  # 进行阅读顺序排序
             }
 
             # 发送请求
