@@ -1,14 +1,14 @@
 [project]
-name = "hello-world-prefab"
+name = "file-processing-prefab"
 version = "0.1.0"
-description = "一个简单的 Hello World 示例预制件，展示如何创建可被 AI 调用的函数"
+description = "封装文件解析 API，支持将 PDF、Markdown、图片等文件解析为 Markdown 格式的纯文本"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
 authors = [
     { name = "Your Name", email = "your.email@example.com" }
 ]
-keywords = ["ai", "prefab", "template", "hello-world", "example"]
+keywords = ["ai", "prefab", "file-processing", "pdf", "markdown", "ocr"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
@@ -19,8 +19,9 @@ classifiers = [
 ]
 
 # 运行时依赖（会被打包到最终产物中）
-# 这个示例预制件不需要额外的依赖
-dependencies = []
+dependencies = [
+    "requests>=2.31.0",
+]
 
 [project.optional-dependencies]
 # 开发和测试依赖（不会被打包）
