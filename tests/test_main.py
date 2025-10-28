@@ -24,8 +24,8 @@ class TestParseFile:
         temp_dir = tempfile.mkdtemp()
         workspace_path = Path(temp_dir)
 
-        # 创建目录结构
-        inputs_dir = workspace_path / "data" / "inputs"
+        # 创建目录结构（v3.0: 文件按 manifest key 组织）
+        inputs_dir = workspace_path / "data" / "inputs" / "input"
         inputs_dir.mkdir(parents=True)
 
         # 创建测试输入文件（模拟 PDF）
@@ -71,7 +71,7 @@ class TestParseFile:
     def test_parse_file_no_input(self, workspace):
         """测试没有输入文件"""
         # 删除所有输入文件
-        for f in (workspace / "data/inputs").glob("*"):
+        for f in (workspace / "data" / "inputs" / "input").glob("*"):
             f.unlink()
 
         result = parse_file()
